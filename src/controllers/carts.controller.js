@@ -85,9 +85,51 @@ const getCartById = async (req, res) => {
     });
   }
 };
+const deleteProductFromCart = async (req, res) => {
+  try {
+    const { cid, pid } = req.params;
+
+    // Buscar el carrito
+    const cart = await Cart.findById(cid);
+
+    if (!cart) {
+      return res.status(404).json({
+        message: "Carrito no encontrado.",
+      });
+    }
+
+    // Verificar que el producto exista dentro del carrito
+    const productExists = cart.products.some((item) =>
+      item.product.equals(pid),
+    );
+
+    if (!productExists) {
+      return res.status(404).json({
+        message: "El producto no existe en el carrito.",
+      });
+    }
+
+    // Eliminar el producto
+    cart.products = cart.products.filter((item) => !item.product.equals(pid));
+
+    await cart.save();
+
+    res.status(200).json({
+      message: "Producto eliminado del carrito correctamente.",
+      cart,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Error al eliminar el producto del carrito.",
+    });
+  }
+};
 
 module.exports = {
   createCart,
   addProductToCart,
   getCartById,
+  deleteProductFromCart,
 };
