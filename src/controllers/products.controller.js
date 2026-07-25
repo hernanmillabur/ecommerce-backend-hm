@@ -3,9 +3,45 @@ const Product = require("../models/product.model");
 // Obtener todos los productos
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    console.log("🔥 GET PRODUCTS NUEVO");
 
-    res.status(200).json(products);
+    let { limit = 10, page = 1, sort, query } = req.query;
+
+    limit = parseInt(limit);
+    page = parseInt(page);
+
+    const filter = {};
+
+    if (query) {
+      filter.category = query;
+    }
+
+    let mongooseQuery = Product.find(filter);
+
+    if (sort === "asc") {
+      mongooseQuery = mongooseQuery.sort({ price: 1 });
+    }
+
+    if (sort === "desc") {
+      mongooseQuery = mongooseQuery.sort({ price: -1 });
+    }
+
+    const totalProducts = await Product.countDocuments(filter);
+
+    const totalPages = Math.ceil(totalProducts / limit);
+
+    const products = await mongooseQuery.skip((page - 1) * limit).limit(limit);
+
+    res.status(200).json({
+      status: "success",
+      payload: products,
+      totalPages,
+      prevPage: page > 1 ? page - 1 : null,
+      nextPage: page < totalPages ? page + 1 : null,
+      page,
+      hasPrevPage: page > 1,
+      hasNextPage: page < totalPages,
+    });
   } catch (error) {
     console.error(error);
 
