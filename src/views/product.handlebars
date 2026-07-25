@@ -1,0 +1,93 @@
+<section class="pt-28 pb-20 bg-zinc-950 min-h-screen">
+
+  <div class="max-w-6xl mx-auto px-6">
+
+    <a
+      href="/products"
+      class="inline-flex items-center text-red-500 hover:text-red-400 mb-10"
+    >
+
+      ← Volver a productos
+
+    </a>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+      <div class="bg-zinc-900 rounded-3xl p-10 flex justify-center">
+
+        {{#if product.thumbnails.[0]}}
+
+          <img
+            src="{{product.thumbnails.[0]}}"
+            alt="{{product.title}}"
+            class="max-h-[420px] object-contain"
+          />
+
+        {{else}}
+
+          <span class="text-9xl">🖥️</span>
+
+        {{/if}}
+
+      </div>
+
+      <div>
+
+        <span class="bg-red-600 px-4 py-2 rounded-full text-sm font-semibold">
+
+          {{product.category}}
+
+        </span>
+
+        <h1 class="text-5xl font-bold mt-6">
+
+          {{product.title}}
+
+        </h1>
+
+        <p class="text-zinc-400 text-lg mt-6 leading-relaxed">
+
+          {{product.description}}
+
+        </p>
+
+        <div class="mt-8 space-y-3 text-lg">
+
+          <p>
+            <strong>Precio:</strong>
+            ${{product.price}}
+          </p>
+
+          <p>
+            <strong>Stock:</strong>
+            {{product.stock}}
+            unidades
+          </p>
+
+          <p>
+            <strong>Código:</strong>
+            {{product.code}}
+          </p>
+
+          <p>
+            <strong>Categoría:</strong>
+            {{product.category}}
+          </p>
+
+        </div>
+
+        <button
+          class="mt-10 w-full bg-red-600 hover:bg-red-500 transition py-4 rounded-xl text-lg font-bold"
+        >
+
+          🛒 Agregar al carrito
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

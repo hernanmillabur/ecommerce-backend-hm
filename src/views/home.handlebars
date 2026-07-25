@@ -1,0 +1,114 @@
+<section class="min-h-screen flex items-center justify-center bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950">
+
+    <div
+        data-aos="fade-up"
+        class="text-center max-w-4xl px-6">
+
+        <span
+            class="inline-block bg-red-600/10 text-red-500 px-4 py-2 rounded-full border border-red-600/20 mb-6">
+
+            ⚡ Tecnología Premium
+
+        </span>
+
+        <h1
+            class="text-5xl md:text-7xl font-extrabold leading-tight">
+
+            Todo tu setup
+
+            <span class="text-red-600">
+
+                en un solo lugar
+
+            </span>
+
+        </h1>
+
+        <p
+            class="text-zinc-400 mt-8 text-lg md:text-xl max-w-2xl mx-auto">
+
+            Descubre componentes, periféricos y hardware de alto rendimiento para llevar tu experiencia al siguiente nivel.
+
+        </p>
+
+        <div
+            class="mt-10 flex justify-center gap-5">
+
+            <a
+                href="#productos"
+                class="bg-red-600 hover:bg-red-500 hover:scale-105 hover:shadow-xl hover:shadow-red-600/30 transition duration-300 px-8 py-4 rounded-xl font-semibold">
+
+                Explorar Productos
+
+            </a>
+
+            <button
+                class="border border-zinc-700 hover:border-red-600 hover:text-red-500 transition px-8 py-4 rounded-xl">
+
+                Ver Ofertas
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section
+    id="productos"
+    class="py-24 bg-zinc-950">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="text-center mb-14">
+
+            <h2 class="text-4xl font-bold">
+
+                Productos Destacados
+
+            </h2>
+
+            <p class="text-zinc-500 mt-3">
+
+                Los favoritos de nuestra comunidad.
+
+            </p>
+
+        </div>
+
+        {{#if products.length}}
+
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+
+            {{#each products}}
+
+                {{> product-card this}}
+
+            {{/each}}
+
+        </div>
+
+        {{else}}
+
+        <div class="text-center py-20">
+
+            <h3 class="text-2xl font-semibold text-zinc-300">
+
+                Aún no existen productos.
+
+            </h3>
+
+            <p class="text-zinc-500 mt-3">
+
+                Agrega productos desde tu API y aparecerán aquí automáticamente.
+
+            </p>
+
+        </div>
+
+        {{/if}}
+
+    </div>
+
+</section>

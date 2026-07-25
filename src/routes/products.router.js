@@ -6,10 +6,15 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
+  seedProducts,
 } = require("../controllers/products.controller");
 
 const router = Router();
 
+// Seed
+router.post("/seed", seedProducts);
+
+// CRUD
 router.get("/", getProducts);
 router.get("/:pid", getProductById);
 router.post("/", createProduct);

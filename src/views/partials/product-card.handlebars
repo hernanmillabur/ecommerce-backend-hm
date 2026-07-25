@@ -1,0 +1,64 @@
+<div
+  data-aos="zoom-in"
+  class="bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden hover:border-red-600 transition duration-300 hover:-translate-y-2"
+>
+
+  <div
+    class="h-56 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center"
+  >
+
+    {{#if thumbnails.[0]}}
+
+      <img
+        src="{{thumbnails.[0]}}"
+        alt="{{title}}"
+        class="h-40 object-contain"
+      />
+
+    {{else}}
+
+      <span class="text-6xl">🖥️</span>
+
+    {{/if}}
+
+  </div>
+
+  <div class="p-6">
+
+    <span class="text-sm text-red-500">
+      {{category}}
+    </span>
+
+    <h3 class="text-xl font-bold mt-2">
+      {{title}}
+    </h3>
+
+    <p class="text-zinc-400 mt-3 line-clamp-2">
+      {{description}}
+    </p>
+
+    <div class="flex justify-between items-center mt-6">
+
+      <span class="text-2xl font-bold">
+        ${{price}}
+      </span>
+
+      <span class="text-sm text-zinc-500">
+        Stock
+        {{stock}}
+      </span>
+
+    </div>
+
+    <a
+      href="/products/{{_id}}"
+      class="block text-center w-full mt-6 bg-red-600 hover:bg-red-500 transition rounded-xl py-3 font-semibold"
+    >
+
+      Ver producto
+
+    </a>
+
+  </div>
+
+</div>

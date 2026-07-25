@@ -1,0 +1,104 @@
+<section class="pt-28 pb-20 bg-zinc-950 min-h-screen">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="mb-12">
+
+            <h1 class="text-5xl font-bold">
+                Todos los Productos
+            </h1>
+
+            <p class="text-zinc-400 mt-2">
+                Encuentra el hardware perfecto para tu setup.
+            </p>
+
+        </div>
+
+        <form
+            action="/products"
+            method="GET"
+            class="grid md:grid-cols-4 gap-4 mb-10">
+
+            <input
+                type="text"
+                name="query"
+                value="{{query}}"
+                placeholder="Buscar categoría..."
+                class="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 outline-none">
+
+            <select
+                name="sort"
+                class="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3">
+
+                <option value="">Ordenar</option>
+                <option value="asc">Precio ↑</option>
+                <option value="desc">Precio ↓</option>
+
+            </select>
+
+            <select
+                name="limit"
+                class="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3">
+
+                <option value="4">4 productos</option>
+                <option value="8" selected>8 productos</option>
+                <option value="12">12 productos</option>
+
+            </select>
+
+            <button
+                class="bg-red-600 hover:bg-red-500 rounded-xl font-semibold">
+
+                Aplicar filtros
+
+            </button>
+
+        </form>
+
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+
+            {{#each products}}
+
+                {{> product-card this}}
+
+            {{/each}}
+
+        </div>
+
+        <div class="flex justify-center items-center gap-6 mt-16">
+
+            {{#if hasPrevPage}}
+
+                <a
+                    href="/products?page={{prevPage}}&limit={{limit}}&sort={{sort}}&query={{query}}"
+                    class="px-5 py-3 rounded-xl bg-zinc-800 hover:bg-red-600">
+
+                    ← Anterior
+
+                </a>
+
+            {{/if}}
+
+            <span>
+
+                Página {{page}} de {{totalPages}}
+
+            </span>
+
+            {{#if hasNextPage}}
+
+                <a
+                    href="/products?page={{nextPage}}&limit={{limit}}&sort={{sort}}&query={{query}}"
+                    class="px-5 py-3 rounded-xl bg-zinc-800 hover:bg-red-600">
+
+                    Siguiente →
+
+                </a>
+
+            {{/if}}
+
+        </div>
+
+    </div>
+
+</section>

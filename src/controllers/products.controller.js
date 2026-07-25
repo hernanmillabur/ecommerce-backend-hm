@@ -1,10 +1,9 @@
 const Product = require("../models/product.model");
+const productsSeed = require("../data/products.seed");
 
 // Obtener todos los productos
 const getProducts = async (req, res) => {
   try {
-    console.log("🔥 GET PRODUCTS NUEVO");
-
     let { limit = 10, page = 1, sort, query } = req.query;
 
     limit = parseInt(limit);
@@ -27,7 +26,6 @@ const getProducts = async (req, res) => {
     }
 
     const totalProducts = await Product.countDocuments(filter);
-
     const totalPages = Math.ceil(totalProducts / limit);
 
     const products = await mongooseQuery.skip((page - 1) * limit).limit(limit);
@@ -142,6 +140,7 @@ const updateProduct = async (req, res) => {
   }
 };
 
+// Eliminar producto
 const deleteProduct = async (req, res) => {
   try {
     const { pid } = req.params;
@@ -167,10 +166,34 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+// Cargar productos de ejemplo
+const seedProducts = async (req, res) => {
+  try {
+    // Borra todos los productos existentes
+    await Product.deleteMany({});
+
+    // Inserta el seed
+    await Product.insertMany(productsSeed);
+
+    res.status(200).json({
+      status: "success",
+      message: `${productsSeed.length} productos cargados correctamente.`,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      status: "error",
+      message: "Error al cargar los productos de ejemplo.",
+    });
+  }
+};
+
 module.exports = {
   getProducts,
   getProductById,
   createProduct,
   updateProduct,
   deleteProduct,
+  seedProducts,
 };
