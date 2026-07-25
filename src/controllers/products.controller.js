@@ -32,15 +32,24 @@ const getProducts = async (req, res) => {
 
     const products = await mongooseQuery.skip((page - 1) * limit).limit(limit);
 
+    const hasPrevPage = page > 1;
+    const hasNextPage = page < totalPages;
+
     res.status(200).json({
       status: "success",
       payload: products,
       totalPages,
-      prevPage: page > 1 ? page - 1 : null,
-      nextPage: page < totalPages ? page + 1 : null,
+      prevPage: hasPrevPage ? page - 1 : null,
+      nextPage: hasNextPage ? page + 1 : null,
       page,
-      hasPrevPage: page > 1,
-      hasNextPage: page < totalPages,
+      hasPrevPage,
+      hasNextPage,
+      prevLink: hasPrevPage
+        ? `/api/products?page=${page - 1}&limit=${limit}`
+        : null,
+      nextLink: hasNextPage
+        ? `/api/products?page=${page + 1}&limit=${limit}`
+        : null,
     });
   } catch (error) {
     console.error(error);
