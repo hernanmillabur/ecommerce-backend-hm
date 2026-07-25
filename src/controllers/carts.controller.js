@@ -127,9 +127,50 @@ const deleteProductFromCart = async (req, res) => {
   }
 };
 
+const updateProductQuantity = async (req, res) => {
+  try {
+    const { cid, pid } = req.params;
+    const { quantity } = req.body;
+
+    const cart = await Cart.findById(cid);
+
+    if (!cart) {
+      return res.status(404).json({
+        message: "Carrito no encontrado.",
+      });
+    }
+
+    const productIndex = cart.products.findIndex((item) =>
+      item.product.equals(pid),
+    );
+
+    if (productIndex === -1) {
+      return res.status(404).json({
+        message: "Producto no encontrado en el carrito.",
+      });
+    }
+
+    cart.products[productIndex].quantity = quantity;
+
+    await cart.save();
+
+    res.status(200).json({
+      message: "Cantidad actualizada correctamente.",
+      cart,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Error al actualizar la cantidad del producto.",
+    });
+  }
+};
+
 module.exports = {
   createCart,
   addProductToCart,
   getCartById,
   deleteProductFromCart,
+  updateProductQuantity,
 };
