@@ -1,0 +1,212 @@
+<section class="pt-28 pb-20 min-h-screen bg-zinc-950">
+
+  <div class="max-w-7xl mx-auto px-6">
+
+    <h1 class="text-5xl font-bold mb-12">
+      🛒 Mi carrito
+    </h1>
+
+    {{#if cart.products.length}}
+
+      <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Productos -->
+
+        <div class="lg:col-span-2 space-y-6">
+
+          {{#each cart.products}}
+
+            <div class="bg-zinc-900 rounded-2xl p-6 shadow-lg flex gap-6">
+
+              <div
+                class="w-40 h-40 bg-zinc-800 rounded-xl flex justify-center items-center"
+              >
+
+                {{#if product.thumbnails.[0]}}
+
+                  <img
+                    src="/images/products/{{product.thumbnails.[0]}}"
+                    alt="{{product.title}}"
+                    class="max-h-32 object-contain"
+                  />
+
+                {{else}}
+
+                  <span class="text-6xl">
+                    🖥️
+                  </span>
+
+                {{/if}}
+
+              </div>
+
+              <div class="flex-1">
+
+                <h2 class="text-2xl font-bold">
+
+                  {{product.title}}
+
+                </h2>
+
+                <p class="text-zinc-400 mt-2">
+
+                  {{product.description}}
+
+                </p>
+
+                <div class="mt-6 space-y-2">
+
+                  <p>
+
+                    <strong>Precio:</strong>
+
+                    ${{product.price}}
+
+                  </p>
+
+                  <p>
+
+                    <strong>Cantidad:</strong>
+
+                    {{quantity}}
+
+                  </p>
+
+                  <p>
+
+                    <strong>Subtotal:</strong>
+
+                    ${{subtotal}}
+
+                  </p>
+
+                </div>
+
+                <button
+                  class="removeProduct mt-6 bg-red-600 hover:bg-red-500 transition px-5 py-2 rounded-lg"
+                  data-product-id="{{product._id}}"
+                >
+
+                  🗑️ Eliminar
+
+                </button>
+
+              </div>
+
+            </div>
+
+          {{/each}}
+
+        </div>
+
+        <!-- Resumen -->
+
+        <div>
+
+          <div class="bg-zinc-900 rounded-2xl p-8 sticky top-28">
+
+            <h2 class="text-3xl font-bold mb-8">
+
+              Resumen
+
+            </h2>
+
+            <div class="space-y-4 text-lg">
+
+              <div class="flex justify-between">
+
+                <span>Productos</span>
+
+                <span>{{cart.products.length}}</span>
+
+              </div>
+
+              <div class="flex justify-between">
+
+                <span>Envío</span>
+
+                <span class="text-green-400">
+
+                  Gratis
+
+                </span>
+
+              </div>
+
+              <hr class="border-zinc-700" />
+
+              <div class="flex justify-between text-2xl font-bold">
+
+                <span>Total</span>
+
+                <span class="text-red-500">
+
+                  ${{total}}
+
+                </span>
+
+              </div>
+
+            </div>
+
+            <button
+              class="mt-8 w-full bg-red-600 hover:bg-red-500 transition py-4 rounded-xl font-bold"
+            >
+
+              Finalizar compra
+
+            </button>
+
+            <button
+              id="clearCart"
+              class="mt-4 w-full border border-red-600 text-red-500 hover:bg-red-600 hover:text-white transition py-4 rounded-xl font-bold"
+            >
+
+              Vaciar carrito
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    {{else}}
+
+      <div class="bg-zinc-900 rounded-3xl py-24 text-center">
+
+        <div class="text-7xl mb-6">
+
+          🛒
+
+        </div>
+
+        <h2 class="text-3xl font-bold">
+
+          Tu carrito está vacío
+
+        </h2>
+
+        <p class="text-zinc-400 mt-4">
+
+          Agrega algunos productos para comenzar tu compra.
+
+        </p>
+
+        <a
+          href="/products"
+          class="inline-block mt-8 bg-red-600 hover:bg-red-500 transition px-8 py-4 rounded-xl font-semibold"
+        >
+
+          Ver productos
+
+        </a>
+
+      </div>
+
+    {{/if}}
+
+  </div>
+
+</section>

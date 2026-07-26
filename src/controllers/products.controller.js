@@ -103,6 +103,13 @@ const createProduct = async (req, res) => {
       thumbnails,
     });
 
+    // Socket.IO
+    const io = req.app.get("io");
+    if (io) {
+      const products = await Product.find();
+      io.emit("productsUpdated", products);
+    }
+
     res.status(201).json(newProduct);
   } catch (error) {
     console.error(error);
@@ -153,6 +160,13 @@ const deleteProduct = async (req, res) => {
       });
     }
 
+    // Socket.IO
+    const io = req.app.get("io");
+    if (io) {
+      const products = await Product.find();
+      io.emit("productsUpdated", products);
+    }
+
     res.status(200).json({
       message: "Producto eliminado correctamente.",
       product: deletedProduct,
@@ -169,11 +183,16 @@ const deleteProduct = async (req, res) => {
 // Cargar productos de ejemplo
 const seedProducts = async (req, res) => {
   try {
-    // Borra todos los productos existentes
     await Product.deleteMany({});
 
-    // Inserta el seed
     await Product.insertMany(productsSeed);
+
+    // Socket.IO
+    const io = req.app.get("io");
+    if (io) {
+      const products = await Product.find();
+      io.emit("productsUpdated", products);
+    }
 
     res.status(200).json({
       status: "success",

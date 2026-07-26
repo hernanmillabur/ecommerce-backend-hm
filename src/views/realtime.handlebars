@@ -1,0 +1,26 @@
+<section class="pt-28 pb-20 min-h-screen bg-zinc-950">
+
+  <div class="max-w-7xl mx-auto px-6">
+
+    <h1 class="text-5xl font-bold mb-4">
+      ⚡ Productos en Tiempo Real
+    </h1>
+
+    <p class="text-zinc-400 mb-10">
+      Esta página se actualiza automáticamente mediante Socket.IO cuando se
+      crean o eliminan productos.
+    </p>
+
+    <div
+      id="productsContainer"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+    >
+
+    </div>
+
+  </div>
+
+</section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realtime.js"></script>

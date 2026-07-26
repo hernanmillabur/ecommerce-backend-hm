@@ -5,20 +5,13 @@
 
   <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
 
-    <!-- Logo -->
-
     <a
       href="/products"
       class="text-2xl font-extrabold tracking-wide flex items-center gap-2"
     >
-
       <span class="text-red-600">⚡</span>
-
       HMTechStore
-
     </a>
-
-    <!-- Menú -->
 
     <div class="hidden md:flex items-center gap-10">
 
@@ -36,30 +29,21 @@
 
     </div>
 
-    <!-- Derecha -->
-
     <div class="flex items-center gap-5">
 
-      <!-- Buscar -->
-
       <button class="hover:text-red-500 transition">
-
         🔍
-
       </button>
 
-      <!-- Carrito -->
-
-      <a href="#" class="relative hover:text-red-500 transition">
+      <a id="cartLink" href="#" class="relative hover:text-red-500 transition">
 
         🛒
 
         <span
+          id="cartCount"
           class="absolute -top-2 -right-3 bg-red-600 text-xs rounded-full px-1"
         >
-
           0
-
         </span>
 
       </a>
